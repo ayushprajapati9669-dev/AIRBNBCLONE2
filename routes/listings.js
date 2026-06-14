@@ -5,6 +5,7 @@ const Listing = require("../models/listing.js");
 const { listingSchema } = require("../schema");
 const ExpressError = require("../utils/ExpressError");
 const { validateListing } = require("../middleware.js");
+
 /* ALL LISTINGS */
 
 router.get("/", wrapAsync(async (req, res) => {
@@ -38,7 +39,6 @@ router.post(
                   location,
                   country
             } = req.body;
-
             const listing = new Listing({
                   title,
                   description,
@@ -52,7 +52,7 @@ router.post(
             });
 
             await listing.save();
-
+            req.flash("success", "new listing created !");
             res.redirect("/listings");
       })
 );
@@ -64,7 +64,10 @@ router.get("/:id", wrapAsync(async (req, res) => {
       const { id } = req.params;
 
       const listing = await Listing.findById(id).populate("reviews");
-
+      if (!listing) {
+            req.flash("error", "listing requested for does not exist");
+            return res.redirect("/listings");
+      }
       res.render("./listings/show.ejs", {
             listing
       });
@@ -78,7 +81,10 @@ router.get("/:id/edit", wrapAsync(async (req, res) => {
       const { id } = req.params;
 
       const listing = await Listing.findById(id);
-
+      if (!listing) {
+            req.flash("error", "listing requested for does not exist");
+            return res.redirect("/listings");
+      }
       res.render("./listings/edit.ejs", {
             listing
       });
@@ -90,7 +96,7 @@ router.get("/:id/edit", wrapAsync(async (req, res) => {
 router.put("/:id",
       validateListing,
       wrapAsync(async (req, res) => {
-
+            console.log(req.body);
             const { id } = req.params;
 
             const {
@@ -100,8 +106,7 @@ router.put("/:id",
                   price,
                   location,
                   country
-            } = req.body;
-
+            } = req.body.listing;
             await Listing.findByIdAndUpdate(
                   id,
                   {
@@ -117,7 +122,7 @@ router.put("/:id",
                   },
                   { new: true }
             );
-
+            req.flash("success", "listing updated");
             res.redirect("/listings");
       })
 );
@@ -130,7 +135,7 @@ router.delete("/:id",
             const { id } = req.params;
 
             await Listing.findByIdAndDelete(id);
-
+            req.flash("success", "listing deleted");
             res.redirect("/listings");
       })
 );

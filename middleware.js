@@ -2,13 +2,13 @@ const { listingSchema } = require("./schema.js");
 const { reviewSchema } = require("./schema.js");
 const ExpressError = require("./utils/ExpressError.js");
 
+/* ----------------------- JOI VALIDATION ----------------------- */
 //it validate the listing (middleware function) using joi
 const validateListing = (req, res, next) => {
 
-      const { error } = listingSchema.validate(req.body);
+      const { error } = listingSchema.validate(req.body.listing);
 
       if (error) {
-
             const errMsg = error.details
                   .map((el) => el.message)
                   .join(",");
@@ -18,7 +18,6 @@ const validateListing = (req, res, next) => {
 
       next();
 };
-
 // it validate the reviews (middleware function)
 const validateReview = (req, res, next) => {
 

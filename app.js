@@ -3,17 +3,25 @@ const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-
-
+const session = require("express-session");
 const ExpressError = require("./utils/ExpressError");
-
 const listings = require("./routes/listings.js");
 const reviews = require("./routes/reviews.js");
-
+const flash = require("connect-flash");
 const app = express();
-
+const sessionOptions = {
+      secret: "mysupersecret",
+      resave: false,
+      saveUninitialized: true,
+      cookie: {
+            expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+            httpOnly: true
+      }
+}
 /* ----------------------- MIDDLEWARES ----------------------- */
-
+app.use(flash());
+app.use(session(sessionOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride("_method"));
@@ -24,6 +32,8 @@ app.set("views", path.join(__dirname, "views"));
 app.engine("ejs", ejsMate);
 
 app.use(express.static(path.join(__dirname, "public")));
+
+
 
 /* ----------------------- DB CONNECTION ----------------------- */
 
@@ -38,17 +48,13 @@ main()
       .catch((err) => console.log(err));
 
 
-
+app.use((req, res, next) => {
+      res.locals.success = req.flash("success");
+      res.locals.error = req.flash("error");
+      next();
+});
 app.use("/listings", listings);
 app.use("/listings/:id", reviews);
-
-
-/* ----------------------- ROUTES ----------------------- */
-
-app.get("/", (req, res) => {
-      res.send("I am root");
-});
-
 
 /* 404 */
 
