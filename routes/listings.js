@@ -5,7 +5,7 @@ const Listing = require("../models/listing.js");
 const { listingSchema } = require("../schema");
 const ExpressError = require("../utils/ExpressError");
 const { validateListing } = require("../middleware.js");
-
+const { isLoggedIn, isOwner } = require("../middleware.js");
 /* ALL LISTINGS */
 
 router.get("/", wrapAsync(async (req, res) => {
@@ -20,14 +20,16 @@ router.get("/", wrapAsync(async (req, res) => {
 
 /* NEW FORM */
 
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
+      console.log(req.user);
+
       res.render("./listings/new.ejs");
 });
 
 /* CREATE */
 
 router.post(
-      "/",
+      "/", isLoggedIn,
       validateListing,
       wrapAsync(async (req, res) => {
 
@@ -48,7 +50,8 @@ router.post(
                   },
                   price,
                   location,
-                  country
+                  country,
+                  owner: req.user._id
             });
 
             await listing.save();
@@ -63,11 +66,12 @@ router.get("/:id", wrapAsync(async (req, res) => {
 
       const { id } = req.params;
 
-      const listing = await Listing.findById(id).populate("reviews");
+      const listing = await Listing.findById(id).populate("reviews").populate("owner");
       if (!listing) {
             req.flash("error", "listing requested for does not exist");
             return res.redirect("/listings");
       }
+      console.log(listing);
       res.render("./listings/show.ejs", {
             listing
       });
@@ -76,15 +80,12 @@ router.get("/:id", wrapAsync(async (req, res) => {
 
 /* EDIT FORM */
 
-router.get("/:id/edit", wrapAsync(async (req, res) => {
+router.get("/:id/edit", isLoggedIn, isOwner, wrapAsync(async (req, res) => {
 
       const { id } = req.params;
 
       const listing = await Listing.findById(id);
-      if (!listing) {
-            req.flash("error", "listing requested for does not exist");
-            return res.redirect("/listings");
-      }
+
       res.render("./listings/edit.ejs", {
             listing
       });
@@ -93,7 +94,7 @@ router.get("/:id/edit", wrapAsync(async (req, res) => {
 
 /* UPDATE */
 
-router.put("/:id",
+router.put("/:id", isLoggedIn, isOwner,
       validateListing,
       wrapAsync(async (req, res) => {
             console.log(req.body);
@@ -106,7 +107,8 @@ router.put("/:id",
                   price,
                   location,
                   country
-            } = req.body.listing;
+            } = req.body;
+
             await Listing.findByIdAndUpdate(
                   id,
                   {
@@ -123,13 +125,13 @@ router.put("/:id",
                   { new: true }
             );
             req.flash("success", "listing updated");
-            res.redirect("/listings");
+            res.redirect(`/listings/${id}`);
       })
 );
 
 /* DELETE */
 
-router.delete("/:id",
+router.delete("/:id", isLoggedIn, isOwner,
       wrapAsync(async (req, res) => {
 
             const { id } = req.params;

@@ -15,7 +15,9 @@ connectDb()
 async function initDB() {
       try {
             await Listing.deleteMany({});
-
+            initData.data = initData.data.map((listing) => ({
+                  ...listing, owner: "6a311fdd9a307575edcb906d"
+            }));
             // Insert Sample Data
             await Listing.insertMany(initData.data);
 

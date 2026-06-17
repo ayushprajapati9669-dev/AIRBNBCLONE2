@@ -1,10 +1,11 @@
-/* =========================================
-   GLOBAL STYLING
-========================================= */
+/* ==================================================
+   GLOBAL STYLES
+================================================== */
 
 body {
       font-family: "Plus Jakarta Sans", sans-serif !important;
       background-color: #f8f9fa !important;
+
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -14,9 +15,9 @@ body {
       flex: 1;
 }
 
-/* =========================================
+/* ==================================================
    NAVBAR
-========================================= */
+================================================== */
 
 .navbar {
       height: 5rem;
@@ -30,13 +31,13 @@ body {
 }
 
 .nav-link {
-      color: #222222 !important;
+      color: #222 !important;
       font-weight: 500 !important;
 }
 
-/* =========================================
+/* ==================================================
    FOOTER
-========================================= */
+================================================== */
 
 .footer-info {
       display: flex;
@@ -67,13 +68,13 @@ body {
 }
 
 .footer-social i {
-      font-size: 1.2rem;
       color: black;
+      font-size: 1.2rem;
 }
 
-/* =========================================
+/* ==================================================
    LISTING CARDS (HOME PAGE)
-========================================= */
+================================================== */
 
 .listing-link {
       text-decoration: none !important;
@@ -105,13 +106,13 @@ body {
       background-color: white;
 }
 
-/* =========================================
+/* ==================================================
    NEW LISTING FORM
-========================================= */
+================================================== */
 
 .listing-form {
-      max-width: 750px !important;
-      margin: 3rem auto !important;
+      max-width: 750px;
+      margin: 3rem auto;
 }
 
 /* Form Card */
@@ -119,13 +120,8 @@ body {
 .listing-form .card {
       background-color: white !important;
       border-radius: 20px !important;
-      overflow: hidden !important;
-      border: none !important;
+      overflow: hidden;
 }
-
-/* Important:
-   Bootstrap ki p-4 aur p-md-5 classes ko override karega
-*/
 
 .listing-form .card-body {
       padding: 2rem !important;
@@ -134,24 +130,24 @@ body {
 /* Form Heading */
 
 .listing-form .card-title {
-      font-size: 2rem !important;
-      font-weight: 700 !important;
-      color: #222 !important;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #222;
 }
 
 /* Labels */
 
 .listing-form .form-label {
-      font-weight: 600 !important;
-      margin-bottom: 0.5rem !important;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
 }
 
 /* Inputs */
 
 .listing-form .form-control {
-      padding: 0.85rem !important;
-      border-radius: 10px !important;
-      border: 1px solid #ced4da !important;
+      padding: 0.85rem;
+      border-radius: 10px;
+      border: 1px solid #ced4da;
 }
 
 /* Input Focus */
@@ -164,89 +160,42 @@ body {
 /* Textarea */
 
 .listing-form textarea {
-      resize: none !important;
+      resize: none;
 }
 
-/* Submit Button */
+/* Publish Button */
 
 .btn-submit {
       background-color: #fe424d !important;
       color: white !important;
+
       border: none !important;
+      border-radius: 10px;
 
-      padding: 12px !important;
-      font-size: 1rem !important;
-      font-weight: 600 !important;
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: 600;
 
-      border-radius: 10px !important;
       transition: 0.2s ease-in-out;
 }
-
-/* Hover Effect */
 
 .btn-submit:hover {
       background-color: #e63946 !important;
       transform: translateY(-2px);
 }
 
-/* =========================================
-   SHOW PAGE
-========================================= */
-
-.show-img {
-      height: 30vh;
-      object-fit: cover;
-      border-radius: 1rem;
-}
-
-.show-card {
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-}
-
-/* =========================================
-   RESPONSIVE DESIGN
-========================================= */
-
-@media (max-width: 768px) {
-
-      .listing-form {
-            margin: 1rem !important;
-      }
-
-      .footer-info {
-            height: auto;
-            padding: 1rem;
-            justify-content: center;
-            gap: 1rem;
-      }
-}
-
-/* show listing syling */
+/* ==================================================
+   SHOW LISTING PAGE
+================================================== */
 
 .show-card {
       max-width: 50rem;
       margin: auto;
+
       border: none;
-}
-
-.show-img {
-      height: 30vh;
-      object-fit: cover;
       border-radius: 1rem;
-}
 
-.card-body {
-      padding-left: 0;
-}
-
-.btn {
-      padding: 0.5rem 1.5rem;
-}
-
-.show-card {
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      border-radius: 1rem;
 }
 
 .show-card:hover {
@@ -254,4 +203,89 @@ body {
       transition: 0.3s;
 }
 
-/* for revies manage delete button bottom spacing */
+.show-img {
+      height: 30vh;
+      object-fit: cover;
+      border-radius: 1rem;
+}
+
+.show-card .card-body {
+      padding-left: 0;
+}
+
+.btn {
+      padding: 0.5rem 1.5rem;
+}
+
+/* ==================================================
+   SIGNUP PAGE
+================================================== */
+
+.signup-btn {
+      background-color: #FF385C !important;
+      color: white !important;
+
+      border: none !important;
+      border-radius: 10px;
+
+      padding: 10px 35px;
+      font-weight: 600;
+
+      transition: 0.2s ease-in-out;
+}
+
+.signup-btn:hover {
+      background-color: #E31C5F !important;
+      color: white !important;
+}
+
+/* ==================================================
+   RESPONSIVE DESIGN
+================================================== */
+
+@media (max-width: 768px) {
+
+      .listing-form {
+            margin: 1rem;
+      }
+
+      .footer-info {
+            height: auto;
+            padding: 1rem;
+
+            justify-content: center;
+            gap: 1rem;
+      }
+}
+
+/* =========================================
+   CUSTOM VALIDATION ICONS
+========================================= */
+
+/* Right Tick for Valid Inputs */
+
+.was-validated .form-control:valid {
+      border-color: #198754 !important;
+
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23198754' d='M13.854 3.646a.5.5 0 0 0-.708-.708L6 10.086 2.854 6.939a.5.5 0 1 0-.708.707l3.5 3.5a.5.5 0 0 0 .708 0l7.5-7.5z'/%3E%3C/svg%3E") !important;
+
+      background-repeat: no-repeat !important;
+      background-position: right 0.75rem center !important;
+      background-size: 1rem 1rem !important;
+
+      padding-right: 2.5rem !important;
+}
+
+/* Right Cross for Invalid Inputs */
+
+.was-validated .form-control:invalid {
+      border-color: #dc3545 !important;
+
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23dc3545' d='M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E") !important;
+
+      background-repeat: no-repeat !important;
+      background-position: right 0.75rem center !important;
+      background-size: 1rem 1rem !important;
+
+      padding-right: 2.5rem !important;
+}

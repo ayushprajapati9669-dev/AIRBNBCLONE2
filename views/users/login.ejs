@@ -1,0 +1,59 @@
+<% layout("/layouts/boilerplate") %>
+
+      <div class="row mt-5">
+
+            <h1 class="col-md-6 offset-md-3 text-center mb-4">
+                  login
+            </h1>
+
+            <div class="col-md-6 offset-md-3">
+
+                  <form action="/login" method="POST" class="needs-validation" novalidate>
+
+                        <!-- Username -->
+                        <div class="mb-3">
+                              <label for="user" class="form-label fw-semibold">
+                                    Username
+                              </label>
+
+                              <input type="text" id="user" name="username" class="form-control"
+                                    placeholder="Enter username" required>
+
+                              <div class="valid-feedback">
+                                    Looks good!
+                              </div>
+
+                              <div class="invalid-feedback">
+                                    Please enter username.
+                              </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="mb-4">
+                              <label for="password" class="form-label fw-semibold">
+                                    Password
+                              </label>
+
+                              <input type="password" id="password" name="password" class="form-control" minlength="6"
+                                    placeholder="Enter password" required>
+
+                              <div class="valid-feedback">
+                                    Password looks good!
+                              </div>
+
+                              <div class="invalid-feedback">
+                                    Password must be at least 6 characters.
+                              </div>
+                        </div>
+
+                        <div class="text-center">
+                              <button type="submit" class="btn signup-btn">
+                                    login
+                              </button>
+                        </div>
+
+                  </form>
+
+            </div>
+
+      </div>

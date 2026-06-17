@@ -5,9 +5,17 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const session = require("express-session");
 const ExpressError = require("./utils/ExpressError");
-const listings = require("./routes/listings.js");
-const reviews = require("./routes/reviews.js");
+
 const flash = require("connect-flash");
+
+
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user.js");
+
+const listingRouter = require("./routes/listings.js");
+const reviewRouter = require("./routes/reviews.js");
+const userRouter = require("./routes/user.js");
 const app = express();
 const sessionOptions = {
       secret: "mysupersecret",
@@ -31,9 +39,19 @@ app.set("views", path.join(__dirname, "views"));
 
 app.engine("ejs", ejsMate);
 
+// setting for password authentication
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use(passport.initialize());// har ek request ke liye passport initialize ho jayega
 
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());// user se related jitni bhi information h use hum session mein store karata means serialize karna user ko ab user ki information single session ke ander store h to use bar bar login nahi karna padega user ko seriallize kar diya single session mein
+
+passport.deserializeUser(User.deserializeUser());// agar user ne ek bar serial end kar liya session ko to us user ko deseriallize karna padega
+
+// end of setting for a password
 
 /* ----------------------- DB CONNECTION ----------------------- */
 
@@ -51,10 +69,15 @@ main()
 app.use((req, res, next) => {
       res.locals.success = req.flash("success");
       res.locals.error = req.flash("error");
+      res.locals.currentUser = req.user;
       next();
 });
-app.use("/listings", listings);
-app.use("/listings/:id", reviews);
+
+
+
+app.use("/listings", listingRouter);
+app.use("/listings/:id", reviewRouter);
+app.use("/", userRouter);
 
 /* 404 */
 
