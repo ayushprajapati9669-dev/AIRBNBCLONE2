@@ -2,6 +2,7 @@ const { listingSchema } = require("./schema.js");
 const { reviewSchema } = require("./schema.js");
 const ExpressError = require("./utils/ExpressError.js");
 const Listing = require("./models/listing.js");
+const Review = require("./models/review.js");
 /* ----------------------- JOI VALIDATION ----------------------- */
 //it validate the listing (middleware function) using joi
 const validateListing = (req, res, next) => {
@@ -64,10 +65,22 @@ let isOwner = async (req, res, next) => {
       }
       next()
 }
+let isReviewAuthor = async (req, res, next) => {
+
+      let { id, reviewId } = req.params;
+      let review = await Review.findById(reviewId);
+      if (!review.author.equals(res.locals.currentUser._id)) {
+            req.flash("error", "you are not author of this review!");
+            res.redirect(`/listings/${id}`);
+            return;
+      }
+      next();
+}
 module.exports = {
       validateListing,
       validateReview,
       isLoggedIn,
       saveRedirectUrl,
-      isOwner
+      isOwner,
+      isReviewAuthor
 }
