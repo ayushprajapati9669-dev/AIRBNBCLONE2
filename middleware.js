@@ -3,6 +3,8 @@ const { reviewSchema } = require("./schema.js");
 const ExpressError = require("./utils/ExpressError.js");
 const Listing = require("./models/listing.js");
 const Review = require("./models/review.js");
+
+
 /* ----------------------- JOI VALIDATION ----------------------- */
 //it validate the listing (middleware function) using joi
 const validateListing = (req, res, next) => {
