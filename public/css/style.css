@@ -391,3 +391,18 @@ body {
       right: 8px !important;
       z-index: 1000;
 }
+
+.search-bar {
+      width: 40%;
+      max-width: 500px;
+}
+
+.search-bar input {
+      border: 1px solid #ddd;
+      box-shadow: none;
+}
+
+.search-bar input:focus {
+      border-color: #ff385c;
+      box-shadow: 0 0 0 0.15rem rgba(255, 56, 92, 0.2);
+}

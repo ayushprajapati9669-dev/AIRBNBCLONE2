@@ -62,9 +62,9 @@ passport.deserializeUser(User.deserializeUser());// agar user ne ek bar serial e
 /* ----------------------- DB CONNECTION ----------------------- */
 
 const url = "mongodb://127.0.0.1:27017/vanderlust";
-
+const dbUrl = process.env.ATLAS_URL;
 async function main() {
-      await mongoose.connect(url);
+      await mongoose.connect(dbUrl);
 }
 
 main()

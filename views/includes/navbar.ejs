@@ -1,28 +1,63 @@
-<nav class="navbar navbar-expand-md bg-body-tertiary border-bottom sticky-top">
-      <div class="container-fluid">
-            <a class="navbar-brand" href="#"><i class="fa-brands fa-airbnb"></i></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                  aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-md bg-white border-bottom sticky-top shadow-sm">
+      <div class="container-fluid px-4">
+
+            <!-- Brand -->
+            <a class="navbar-brand d-flex align-items-center gap-2 text-danger fw-bold" href="/">
+                  <i class="fa-brands fa-airbnb fs-3"></i>
+                  <span class="d-none d-sm-inline">airbnb</span>
+            </a>
+            <!-- CENTER LINKS (updated) -->
+            <ul class="navbar-nav mx-auto gap-3 text-center align-items-center">
+
+
+
+                  <li class="nav-item">
+                        <a class="nav-link fw-medium active-explore" href="/listings">
+                              Explore
+                        </a>
+                  </li>
+
+
+
+            </ul>
+            <!-- Toggle -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                  aria-controls="navbarNav" aria-expanded="false">
                   <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                  <div class="navbar-nav">
-                        <a class="nav-link " aria-current="page" href="/">Home</a>
-                        <a class="nav-link" href="/listings">all listings</a>
-                        <a class="nav-link" href="/listings/new">add new listing</a>
 
-                  </div>
-                  <div class="navbar-nav ms-auto">
-                        <% if(!currentUser) {%>
-                              <a class="nav-link " aria-current="page" href="/signup">signup</a>
-                              <a class="nav-link" href="/login">login</a>
-                              <%}%>
+            <div class="collapse navbar-collapse" id="navbarNav">
+
+                  <!-- CENTER SEARCH BAR -->
+                  <form class="d-flex mx-auto my-2 my-md-0 search-bar">
+                        <input class="form-control rounded-pill px-4" type="search"
+                              placeholder="Search destinations, homes..." />
+                        <button class="btn btn-danger rounded-pill ms-2">
+                              <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                  </form>
+
+                  <!-- RIGHT SIDE -->
+                  <div class="navbar-nav ms-auto align-items-center gap-2">
+
+                        <!-- Host your home always visible -->
+                        <a class="nav-link px-3 py-1 rounded-pill border fw-medium" href="/listings/new">
+                              Host your home
+                        </a>
+
+                        <% if(!currentUser) { %>
+                              <a class="nav-link px-3 py-1 rounded-pill border" href="/signup">Sign up</a>
+                              <a class="nav-link px-3 py-1 rounded-pill border" href="/login">Log in</a>
+                              <% } %>
+
                                     <% if(currentUser) { %>
-                                          <a class="nav-link" href="/logout">logout</a>
-                                          <%}%>
-
+                                          <a class="nav-link px-3 py-1 rounded-pill  text-white" href="/logout">
+                                                Logout
+                                          </a>
+                                          <% } %>
 
                   </div>
+
             </div>
       </div>
 </nav>
