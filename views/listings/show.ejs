@@ -178,9 +178,16 @@
 
                         </div>
                         <div class="show-card mt-4">
-                              <div id="map" style="height: 400px;"></div>
+                              <div id="map" style="height: 400px; border-radius: 8px;"></div>
                         </div>
 
       </div>
+      <script>
+            const listingLocation = <%- JSON.stringify(listing.location) %>;
+            const listingCountry = <%- JSON.stringify(listing.country) %>;
+            const listingTitle = <%- JSON.stringify(listing.title) %>;
+            const listingImage = <%- JSON.stringify(listing.image.url) %>;
+            const listingPrice = <%- JSON.stringify(listing.price) %>;
+      </script>
       <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
       <script src="/js/map.js"></script>

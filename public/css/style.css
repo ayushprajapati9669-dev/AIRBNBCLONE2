@@ -289,3 +289,105 @@ body {
 
       padding-right: 2.5rem !important;
 }
+
+/* ==================================================
+   LEAFLET CUSTOM STYLES (AIRBNB STYLE)
+================================================== */
+
+.airbnb-marker {
+      background-color: #FF385C !important;
+      color: white !important;
+      border: 3px solid white !important;
+      border-radius: 50% !important;
+      width: 44px !important;
+      height: 44px !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25) !important;
+      transition: all 0.2s ease-in-out !important;
+}
+
+.airbnb-marker:hover {
+      transform: scale(1.15) !important;
+      background-color: #E31C5F !important;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35) !important;
+}
+
+.airbnb-marker i {
+      font-size: 18px !important;
+}
+
+/* Custom Popup Style */
+.leaflet-popup-content-wrapper {
+      padding: 0 !important;
+      overflow: hidden !important;
+      border-radius: 16px !important;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2) !important;
+}
+
+.leaflet-popup-content {
+      margin: 0 !important;
+      width: 250px !important;
+}
+
+.airbnb-popup-card {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      display: flex;
+      flex-direction: column;
+}
+
+.airbnb-popup-img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+}
+
+.airbnb-popup-info {
+      padding: 12px 16px;
+      background-color: white;
+}
+
+.airbnb-popup-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #222;
+      margin: 0 0 4px 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+}
+
+.airbnb-popup-location {
+      font-size: 12px;
+      color: #717171;
+      margin: 0 0 8px 0;
+}
+
+.airbnb-popup-price {
+      font-size: 14px;
+      color: #222;
+      margin: 0;
+}
+
+.airbnb-popup-price strong {
+      font-weight: 800;
+}
+
+/* Custom leaflet close button offset adjustments */
+.leaflet-popup-close-button {
+      color: #222 !important;
+      padding: 6px 0 0 6px !important;
+      width: 28px !important;
+      height: 28px !important;
+      font-size: 20px !important;
+      font-weight: bold !important;
+      border-radius: 50% !important;
+      background-color: rgba(255, 255, 255, 0.9) !important;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18) !important;
+      top: 8px !important;
+      right: 8px !important;
+      z-index: 1000;
+}
