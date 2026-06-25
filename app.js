@@ -10,6 +10,8 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const session = require("express-session");
+const { MongoStore } = require("connect-mongo");
+console.log(MongoStore);
 const ExpressError = require("./utils/ExpressError");
 
 const flash = require("connect-flash");
@@ -23,7 +25,20 @@ const listingRouter = require("./routes/listings.js");
 const reviewRouter = require("./routes/reviews.js");
 const userRouter = require("./routes/user.js");
 const app = express();
+const dbUrl = process.env.ATLAS_URL;
+
+let store = MongoStore.create({
+      mongoUrl: dbUrl,
+      crypto: {
+            secret: "mysupersecret",
+      },
+      touchAfter: 24 * 3600
+})
+store.on("error", () => {
+      console.log("error in mongo store", err);
+})
 const sessionOptions = {
+      store,
       secret: "mysupersecret",
       resave: false,
       saveUninitialized: true,
@@ -33,6 +48,7 @@ const sessionOptions = {
             httpOnly: true
       }
 }
+
 /* ----------------------- MIDDLEWARES ----------------------- */
 app.use(flash());
 app.use(session(sessionOptions));
@@ -61,8 +77,8 @@ passport.deserializeUser(User.deserializeUser());// agar user ne ek bar serial e
 
 /* ----------------------- DB CONNECTION ----------------------- */
 
-const url = "mongodb://127.0.0.1:27017/vanderlust";
-const dbUrl = process.env.ATLAS_URL;
+// const url = "mongodb://127.0.0.1:27017/vanderlust";
+
 async function main() {
       await mongoose.connect(dbUrl);
 }
